@@ -1,0 +1,43 @@
+@import '../../../../../job-apply-form-master/job-apply-form-master/src/assets/core/setting';
+
+.side-drawer {
+    height: 100%;
+    background-color: white;
+    box-shadow: 2px 0px 7px rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 150px;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 50%;
+    max-width: 200px;
+    transform: translateX(-100%);// con esto se oculta
+    transition: transform 0.3s ease-out;
+}
+
+.side-drawer a:hover,
+.side-drawer a:active{
+    color: $darkGreen;
+}
+
+.sideDrawer__navigation-items{
+    margin: 75px auto;
+    list-style: none;
+    display: grid;
+    grid-template-rows: 50px 50px 50px 50px;
+    justify-content: center;
+    text-align: center;
+    font-size: $fontSmall;
+}
+
+.sideDrawer__navigation-itemlink{
+    color: $darkGrey;
+    text-decoration: none;
+}
+
+.side-drawer.open{
+    transform: translateX(0)//el side drawer está presente
+}
+

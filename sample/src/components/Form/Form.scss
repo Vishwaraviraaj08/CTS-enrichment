@@ -1,0 +1,261 @@
+@import '../../../src/assets/core/setting';
+* {
+    box-sizing: content-box;
+    margin: 0px;
+    padding: 0;
+}
+
+.wrapper-padding {
+    margin: 140px 20px 60px;
+}
+
+.form-wrapper {
+    margin: 60px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-message {
+    color: $mediumGrey;
+    margin-left: 0.5rem
+}
+
+.form-title {
+    font-family: $fontText;
+    color: $darkGreen;
+    display: block;
+    text-align: center;
+    font-weight: 500;
+}
+
+.form-text {
+    font-family: $fontText;
+    font-size: $fontSmall;
+    color: $darkGrey;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.form-item {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 27px auto;
+}
+
+.form-subtext {
+    font-family: $fontText;
+    font-size: 13px;
+    color: $darkGrey;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.form-asterisk {
+    font-family: $fontText;
+    font-size: $fontSuperSmall;
+    color: $darkGreen;
+}
+
+.form-label {
+    font-family: $fontText;
+    font-size: $fontSmall;
+    display: block;
+    margin: 1px 0px 11px 0px;
+}
+
+.form-field {
+    box-sizing: border-box;
+    height: 45px;
+    padding: 5px;
+    margin: 0px;
+    width: 100%;
+    border-radius: 5px;
+    font-family: $fontText;
+    font-size: $fontSmall;
+}
+
+.block-number-zipcode {
+    display: flex;
+    width: 100%;
+}
+
+.form-field-text {
+    box-sizing: border-box;
+    height: 200px;
+    width: 100%;
+    font-family: $fontText;
+    font-size: $fontSmall;
+    padding: 5px;
+    margin: 0;
+}
+
+.form-submit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px;
+    width: 100%;
+    margin-top: 30px;
+    color: $darkGrey;
+    font-size: 18px;
+    background: $mediumGreen;
+    font-family: $fontText;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.form-submit-button a:hover,
+.form-submit-button a:active {
+    color: rgb(155, 215, 235);
+    border: white;
+}
+
+.form-field-file {
+    font-family: $fontText;
+}
+
+@media all and (min-width:500px) {
+    .wrapper-padding {
+        margin-top: 300px;
+    }
+    .block-birthdate-gender {
+        display: flex;
+        justify-content: space-between;
+    }
+    .form-wrapper {
+        width: 500px;
+    }
+    .form-title {
+        font-weight: 500;
+    }
+    .form-birthdate {
+        margin: 0px;
+    }
+    .form-gender {
+        margin: 0px;
+    }
+    .form-submit-button {
+        width: 200px;
+        margin: 0px;
+        display: flex;
+        align-self: flex-end;
+    }
+}
+
+@media all and (min-width:1000px) {
+    .wrapper-padding {
+        margin-top: 500px;
+    }
+    .form-wrapper {
+        width: 700px;
+    }
+    .form-title {
+        font-size: $fontSuperBig;
+        font-weight: 600;
+    }
+    .form-text {
+        font-size: $fontMedium;
+    }
+    .form-subtext {
+        font-size: $fontSmall;
+        color: $darkGrey;
+    }
+    .form-asterisk {
+        font-size: $fontSmall;
+    }
+
+    .form-label {
+        font-size: $fontMedium;
+    }
+    .form-field {
+        font-size: $fontMedium;
+        height: 70px;
+        padding: 15px;
+        margin: 17px 0;
+    }
+    .form-field-text {
+        font-size: $fontMedium;
+        height: 250px;
+        padding: 10px;
+        margin: 0;
+    }
+    .form-item {
+        margin: 35px auto;
+    }
+    .form-birthdate {
+        margin: 0px;
+        padding: 0;
+    }
+    .form-gender {
+        margin: 0px;
+        padding: 0;
+    }
+    .block-number-zipcode {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+    
+    .form-submit-button {
+        font-size: $fontMedium;
+        width: 300px;
+        margin: 0px;
+        display: flex;
+        align-self: flex-end;
+    }
+}
+
+@media all and (min-width:1400px) {
+    .wrapper-padding {
+        margin-top: 750px;
+    }
+    .form-wrapper {
+        width: 850px;
+    }
+    .form-title {
+        font-weight: 800;
+    }
+    .form-text {
+        font-size: $fontMidMedium;
+    }
+    .form-subtext {
+        font-size: $fontMedium;
+    }
+    .form-asterisk {
+        font-size: $fontMedium;
+    }
+    .form-label {
+        font-size: $fontMidMedium;
+    }
+    .form-field {
+        font-size: $fontMidMedium;
+    }
+    .form-field-text {
+        font-size: $fontMidMedium;
+        padding: 10px;
+        margin: 0;
+        height: 400px;
+    }
+    .form-item {
+        margin: 35px auto;
+    }
+    .form-birthdate {
+        margin: 0px;
+    }
+    .form-gender {
+        margin: 0px;
+    }
+    .form-submit-button {
+        font-size: $fontMidMedium;
+        width: 400px;
+        margin: 0px;
+        display: flex;
+        align-self: flex-end;
+    }
+    .form-submit-button {
+        width: 400px;
+        height: 80px;
+    }
+}
