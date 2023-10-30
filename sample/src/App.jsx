@@ -3,10 +3,11 @@ import "./App.scss";
 import Swal from "sweetalert2";
 import Form from "./components/Form/index.jsx";
 
+
 const App = () => {
     const [state, setState] = useState({
         fullName: "",
-        birthDate: new Date(),
+        birthDate: "",
         email: "",
         gender: "",
         address: "",
@@ -88,9 +89,9 @@ const App = () => {
                     break;
 
                 case "zipcode":
-                    formErrors.zipcode = RegExp(/^([0-9]{4}[ ]+[a-zA-Z]{2})$/).test(value)
+                    formErrors.zipcode = RegExp(/^([0-9]{6})$/).test(value)
                         ? "Perfect!"
-                        : "Please enter a valid dutch zipcode";
+                        : "Please enter a valid zipcode";
                     break;
 
                 default:
@@ -105,7 +106,30 @@ const App = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     if (
+    //         state.formErrors.fullName === "Perfect!" &&
+    //         state.formErrors.birthDate === "" &&
+    //         state.formErrors.email === "Perfect!" &&
+    //         state.formErrors.gender === "Perfect!" &&
+    //         state.formErrors.address === "Perfect!" &&
+    //         state.formErrors.houseNumber === "Perfect!" &&
+    //         state.formErrors.zipcode === "Perfect!" &&
+    //         state.formErrors.file === "ok" &&
+    //         state.formErrors.letter === "ok"
+    //     ) {
+    //         Swal.fire("Thanks for submitting!", "We will contact you soon!", "success");
+    //     } else {
+    //         Swal.fire({
+    //             type: "error",
+    //             title: "Oops...",
+    //             text: "Something went wrong!",
+    //         });
+    //     }
+    // };
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (
             state.formErrors.fullName === "Perfect!" &&
@@ -118,7 +142,38 @@ const App = () => {
             state.formErrors.file === "ok" &&
             state.formErrors.letter === "ok"
         ) {
-            Swal.fire("Thanks for submitting!", "We will contact you soon!", "success");
+            try {
+                const formData = {
+                    fullName: state.fullName,
+                    birthDate: state.birthDate,
+                    email: state.email,
+                    gender: state.gender,
+                    address: state.address,
+                    houseNumber: state.houseNumber,
+                    zipcode: state.zipcode,
+                };
+                console.log(formData);
+
+                const response = await submitFormData(formData); // Call the API function
+
+                // Handle the response as needed
+                if (response) {
+                    Swal.fire("Thanks for submitting!", "We will contact you soon!", "success");
+                } else {
+                    Swal.fire({
+                        type: "error",
+                        title: "Oops...",
+                        text: "Something went wrong!",
+                    });
+                }
+            } catch (error) {
+                // Handle any error that might occur during API request
+                Swal.fire({
+                    type: "error",
+                    title: "Oops...",
+                    text: "Failed to submit form data",
+                });
+            }
         } else {
             Swal.fire({
                 type: "error",
@@ -127,6 +182,35 @@ const App = () => {
             });
         }
     };
+
+    const submitFormData = async (formData) => {
+        try {
+            console.log(formData);
+            const response = await fetch('http://localhost:3001/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                return true; // Request successful
+            } else {
+                return false; // Request failed
+            }
+        } catch (error) {
+            console.error('Error submitting form data:', error);
+            return false; // Request failed due to an error
+        }
+    };
+
+
+
+
+
+
+
 
     return (
         <div className="App">
