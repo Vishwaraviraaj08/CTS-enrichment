@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./App.scss";
 import Swal from "sweetalert2";
 import Form from "./components/Form/index.jsx";
-
+import LoginPage from "./components/LoginPage.jsx";
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 
 const App = () => {
     const [state, setState] = useState({
@@ -206,19 +207,29 @@ const App = () => {
     };
 
 
-
-
-
-
-
-
     return (
-        <div className="App">
-            <main>
-                <Form state={state} onChange={handleChange} onSubmit={handleSubmit} onHandleDate={handleDate} />
-            </main>
-        </div>
+        <>
+            <Routes>
+                <Route path="/signin" element={<LoginPage/>}/>
+                <Route path={"/home"} element={<div className="App">
+                    <main><Form state={state} onChange={handleChange} onSubmit={handleSubmit}
+                                onHandleDate={handleDate}/></main>
+                </div>}/>
+            </Routes>
+
+        </>
     );
+
+
+
+
+    // return (
+    //     <div className="App">
+    //         <main>
+    //             <Form state={state} onChange={handleChange} onSubmit={handleSubmit} onHandleDate={handleDate} />
+    //         </main>
+    //     </div>
+    // );
 };
 
 export default App;
