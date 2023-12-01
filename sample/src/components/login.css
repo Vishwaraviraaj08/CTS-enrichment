@@ -1,3 +1,4 @@
+
 /*@import url("https://fonts.googleapis.com/css?family=Nunito:600,700&display=swap");*/
 /*@import '~bootstrap/dist/css/bootstrap.min.css';*/
 
@@ -76,9 +77,8 @@ body {
         flex-direction: column; /* Stack options vertically on small screens */
     }
 
-    .container {
-        width: 80%;
-    }
+
+
 
     .container {
         text-align: center;
@@ -94,12 +94,9 @@ body {
     opacity: 0.5;
     transition: all 0.2s ease;
     margin-right: 20%;
-}
-
-.options > li {
     list-style-type: none;
-
 }
+
 
 .options > li:hover {
     opacity: 1;
@@ -161,14 +158,10 @@ body {
     color: #aaa;
 }
 
-.account-form-fields > input::-webkit-input-placeholder {
-    color: #aaa;
-}
+/*.account-form-fields > input:-ms-input-placeholder {*/
+/*    color: #aaa;*/
 
-.account-form-fields > input:-ms-input-placeholder {
-    color: #aaa;
-}
-
+/*}*/
 .account-form-fields > input:focus {
     outline: none;
 }

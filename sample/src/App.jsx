@@ -216,7 +216,6 @@ const App = () => {
                                 onHandleDate={handleDate}/></main>
                 </div>}/>
             </Routes>
-
         </>
     );
 

@@ -1,12 +1,8 @@
-
-import React from 'react';
+import { useState ,useEffect} from 'react'
 import './login.css'
-import {useState, useEffect} from "react";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-
-
 
 
 const firebaseConfig = {
@@ -48,13 +44,11 @@ function Form({ option }) {
         let formData = {};
         const formElements = event.target.elements;
 
-        for (let i = 0; i < formElements.length; i++) {
-            const element = formElements[i];
+        for (const element of formElements) {
             if (element.id) {
                 formData[element.id] = element.value;
             }
         }
-
         formData['ipAddress'] = ipAddress;
 
         // Logging the collected form data as JSON
@@ -111,11 +105,7 @@ function Form({ option }) {
                 body: JSON.stringify(formData),
             });
 
-            if (response.ok) {
-                return true; // Request successful
-            } else {
-                return false; // Request failed
-            }
+            return response.ok;
         } catch (error) {
             console.error('Error submitting form data:', error);
             return false; // Request failed due to an error
@@ -132,8 +122,8 @@ function Form({ option }) {
         <form
             method="POST"
             // action={"/" + (option === 1 ? "sign-in" : "sign-up")}
-              onSubmit={handleSubmit}
-              className="account-form"
+            onSubmit={handleSubmit}
+            className="account-form"
         >
             <div
                 className={
@@ -203,4 +193,3 @@ function LoginPage() {
 
 
 export default LoginPage;
-
