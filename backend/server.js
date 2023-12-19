@@ -9,7 +9,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 const { exec } = require('child_process');
 let mac;
-
+const helmet = require('helmet');
+app.use(helmet());
 const uri = "mongodb+srv://vishwaraviraaj08:root@ctseventdrivenframework.x7hjhhn.mongodb.net/";
 const client = new MongoClient(uri, {
     serverApi: {
@@ -38,7 +39,7 @@ app.post('/', async (req, res) => {
     // formData['ipAddress']
     console.log(JSON.stringify(formData, null, 2));
 
-    // console.log(100000000);
+
     try {
         const result = await addUser(formData);
         if (result) {

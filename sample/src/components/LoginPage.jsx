@@ -26,10 +26,77 @@ function LoginPage() {
     const [activeForm, setActiveForm] = useState('signIn');
     const auth = getAuth(app);
     const navigate = useNavigate();
+    const [ipAddress, setIPAddress] = useState('');
+
+    useEffect(() => {
+        async function fetchIP() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                setIPAddress(data.ip);
+            } catch (error) {
+                console.error('Error fetching IP address:', error);
+            }
+        }
+
+        fetchIP();
+    }, []);
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+
+
+        // Collect form data
+        let formData = {};
+        const formElements = event.target.elements;
+
+        for (const element of formElements) {
+            if (element.id) {
+                formData[element.id] = element.value;
+            }
+        }
+        formData['ipAddress'] = ipAddress;
+
+        // Logging the collected form data as JSON
+        console.log(JSON.stringify(formData));
+
+
+        setTimeout(() => {
+
+        }, 1500);
+        console.log('5 seconds later');
+        const response = await submitForm(formData);
+        console.log(response);
+    }
+
+
+    let submitForm = async (formData) => {
+        try {
+            formData = Object.fromEntries(
+                Object.entries(formData).filter(([key, value]) => key !== 'password' && key !== 'repeat-password')
+            );
+
+
+            console.log(formData);
+
+            const response = await fetch('http://localhost:3001/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            return response.ok;
+        } catch (error) {
+            console.error('Error submitting form data:', error);
+            return false; // Request failed due to an error
+        }
+    };
+
     const handleSignIn = async (event) => {
         event.preventDefault();
         // const auth = getAuth(app);
-
         try {
             await signInWithEmailAndPassword(auth, email, password);
             // Handle successful sign-in
@@ -37,11 +104,12 @@ function LoginPage() {
         } catch (error) {
             console.error('Failed to sign in', error);
         }
+
+        await handleSubmit(event);
     };
 
     const handleSignUp = async (event) => {
         event.preventDefault();
-
 
         try {
             await createUserWithEmailAndPassword(auth, email, password);
@@ -50,6 +118,7 @@ function LoginPage() {
         } catch (error) {
             console.error('Failed to create user', error);
         }
+        await handleSubmit(event);
     };
 
     const toggleForm = () => {
@@ -126,7 +195,8 @@ function LoginPage() {
                 {activeForm === 'signIn' && (
                     <form className={"main-form"} onSubmit={handleSignIn}>
                         <h2>Sign In</h2>
-                        <input type='email' placeholder='Enter your email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input type='email' placeholder='Enter your email' value={email}
+                               onChange={(e) => setEmail(e.target.value)}/>
                         <input
                             type='password'
                             placeholder='Enter your password'
@@ -140,7 +210,8 @@ function LoginPage() {
                 {activeForm === 'signUp' && (
                     <form className={"main-form"} onSubmit={handleSignUp}>
                         <h2>Sign Up</h2>
-                        <input type='email' placeholder='Enter your email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <input type='email' placeholder='Enter your email' value={email}
+                               onChange={(e) => setEmail(e.target.value)}/>
                         <input
                             type='password'
                             placeholder='Enter your password'
@@ -151,7 +222,8 @@ function LoginPage() {
                     </form>
                 )}
 
-                <button onClick={toggleForm}>{activeForm === 'signIn' ? 'Switch to Sign Up' : 'Switch to Sign In'}</button>
+                <button
+                    onClick={toggleForm}>{activeForm === 'signIn' ? 'Switch to Sign Up' : 'Switch to Sign In'}</button>
             </div>
         </>
     );

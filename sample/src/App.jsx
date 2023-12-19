@@ -109,29 +109,6 @@ const App = () => {
         });
     };
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     if (
-    //         state.formErrors.fullName === "Perfect!" &&
-    //         state.formErrors.birthDate === "" &&
-    //         state.formErrors.email === "Perfect!" &&
-    //         state.formErrors.gender === "Perfect!" &&
-    //         state.formErrors.address === "Perfect!" &&
-    //         state.formErrors.houseNumber === "Perfect!" &&
-    //         state.formErrors.zipcode === "Perfect!" &&
-    //         state.formErrors.file === "ok" &&
-    //         state.formErrors.letter === "ok"
-    //     ) {
-    //         Swal.fire("Thanks for submitting!", "We will contact you soon!", "success");
-    //     } else {
-    //         Swal.fire({
-    //             type: "error",
-    //             title: "Oops...",
-    //             text: "Something went wrong!",
-    //         });
-    //     }
-    // };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (
@@ -243,17 +220,6 @@ const App = () => {
             </Routes>
         </>
     );
-
-
-
-
-    // return (
-    //     <div className="App">
-    //         <main>
-    //             <Form state={state} onChange={handleChange} onSubmit={handleSubmit} onHandleDate={handleDate} />
-    //         </main>
-    //     </div>
-    // );
 };
 
 export default App;
