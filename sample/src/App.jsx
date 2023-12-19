@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import "./App.scss";
 import Swal from "sweetalert2";
 import Form from "./components/Form/index.jsx";
 import LoginPage from "./components/LoginPage.jsx";
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 const App = () => {
     const [state, setState] = useState({
         fullName: "",
@@ -70,7 +70,7 @@ const App = () => {
 
                 case "gender":
                     formErrors.gender =
-                        RegExp(/^male$|^female$/).test(value) && value.length > 0
+                        RegExp(/^male$||^female$/).test(value) && value.length > 0
                             ? "Perfect!"
                             : "Please choose a gender";
                     break;
@@ -206,12 +206,34 @@ const App = () => {
         }
     };
 
+    const navigate = useNavigate();
+
+    const auth = getAuth();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                setIsAuthenticated(true);
+            } else {
+                setIsAuthenticated(false);
+            }
+        });
+    }, [auth, setIsAuthenticated]);
+
+    useEffect(() => {
+        if (!isAuthenticated) {
+            navigate('/signin');
+        }
+    }, [navigate, isAuthenticated]); // You should add "navigate" to useEffect
 
     return (
         <>
             <Routes>
+                {/*<Route path="/" element={<LoginPage/>}/>*/}
+                <Route path="/" element={<LoginPage/>}/>
                 <Route path="/signin" element={<LoginPage/>}/>
-                <Route path={"/home"} element={<div className="App">
+                <Route path={"/test"} element={<div className="App">
                     <main><Form state={state} onChange={handleChange} onSubmit={handleSubmit}
                                 onHandleDate={handleDate}/></main>
                 </div>}/>

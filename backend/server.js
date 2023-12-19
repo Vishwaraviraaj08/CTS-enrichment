@@ -38,7 +38,7 @@ app.post('/', async (req, res) => {
     // formData['ipAddress']
     console.log(JSON.stringify(formData, null, 2));
 
-    console.log(100000000);
+    // console.log(100000000);
     try {
         const result = await addUser(formData);
         if (result) {

@@ -41,7 +41,7 @@ const Form = ({ onChange, onSubmit, onHandleDate, state }) => {
                   type="email"
                   value={state.email}
                   onChange={onChange}
-                  placeholder="hola@endouble.com"
+                  placeholder="hola@cts.org"
                   required
               />
               <div className="form-message">{state.formErrors.email}</div>
