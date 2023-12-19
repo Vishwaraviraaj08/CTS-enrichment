@@ -5,6 +5,8 @@ import Form from "./components/Form/index.jsx";
 import LoginPage from "./components/LoginPage.jsx";
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom'
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+
+export let submitted = false;
 const App = () => {
     const [state, setState] = useState({
         fullName: "",
@@ -31,7 +33,7 @@ const App = () => {
         isModalOpen: false,
         show: "",
     });
-
+    const [formSubmitted, setFormSubmitted] = useState(false);
     const handleDate = (date) => {
         setState((prevState) => ({
             ...prevState,
@@ -154,10 +156,10 @@ const App = () => {
                     zipcode: state.zipcode,
                 };
                 console.log(formData);
-
+                setFormSubmitted(true);
                 const response = await submitFormData(formData); // Call the API function
-
                 // Handle the response as needed
+
                 if (response) {
                     Swal.fire("Thanks for submitting!", "We will contact you soon!", "success");
                 } else {
@@ -235,7 +237,8 @@ const App = () => {
                 <Route path="/signin" element={<LoginPage/>}/>
                 <Route path={"/test"} element={<div className="App">
                     <main><Form state={state} onChange={handleChange} onSubmit={handleSubmit}
-                                onHandleDate={handleDate}/></main>
+                                onHandleDate={handleDate} formSubmitted={formSubmitted}
+                                setFormSubmitted={setFormSubmitted}/></main>
                 </div>}/>
             </Routes>
         </>

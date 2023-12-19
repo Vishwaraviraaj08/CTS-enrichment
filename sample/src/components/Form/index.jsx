@@ -1,9 +1,16 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./Form.scss";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const Form = ({ onChange, onSubmit, onHandleDate, state }) => {
+
+const Form = ({ onChange, onSubmit, onHandleDate, state, formSubmitted, setFormSubmitted }) => {
+
+  // // Listens to changes on state
+  useEffect(() => {
+    setFormSubmitted(state.formSubmitted);
+  }, [state]);
+
   return (
       <div className="wrapper-padding">
         <h1 className="form-title">Job Application</h1>
@@ -135,7 +142,7 @@ const Form = ({ onChange, onSubmit, onHandleDate, state }) => {
               </div>
             </div>
             {/* file */}
-            <label className="form-label" />
+            <label className="form-label"/>
             <div className="form-file form-item">
               <input
                   className="form-field"
@@ -163,9 +170,11 @@ const Form = ({ onChange, onSubmit, onHandleDate, state }) => {
                   className="form-item form-submit-button"
                   type="button"
                   onClick={onSubmit}
+
               >
                 Submit
               </button>
+              <div hidden={!formSubmitted} id={'submit-label'} style={{padding: "16px", color: "green"}}>Form successfully submitted!</div>
             </div>
           </form>
         </div>
