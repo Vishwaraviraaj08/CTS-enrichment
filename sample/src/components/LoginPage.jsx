@@ -46,7 +46,7 @@ function LoginPage() {
         try {
             await createUserWithEmailAndPassword(auth, email, password);
             // Handle successful sign-up
-            navigate('/home');
+            navigate('/test');
         } catch (error) {
             console.error('Failed to create user', error);
         }
