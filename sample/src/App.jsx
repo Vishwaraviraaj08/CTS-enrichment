@@ -70,7 +70,7 @@ const App = () => {
 
                 case "gender":
                     formErrors.gender =
-                        RegExp(/^male$|^female$/).test(value) && value.length > 0
+                        RegExp(/^male$||^female$/).test(value) && value.length > 0
                             ? "Perfect!"
                             : "Please choose a gender";
                     break;
@@ -216,6 +216,7 @@ const App = () => {
                                 onHandleDate={handleDate}/></main>
                 </div>}/>
             </Routes>
+
         </>
     );
 
